@@ -38,7 +38,7 @@ from src.generators import card_number_generator, filter_by_currency, transactio
                 },
             ],
         ),
-        ("", ["валюта введена не корректно"]),
+        ("", []),
     ],
 )
 def test_filter_by_currency(value_test_filter_by_currency, value, expected):
