@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 from generators import filter_by_currency
 from process_bank_search_operations import process_bank_operations, process_bank_search
@@ -24,11 +25,7 @@ def get_data_directory() -> Path:
 
 def get_file_paths(data_dir: Path) -> dict:
     """Возвращает пути к файлам данных"""
-    return {
-        1: data_dir / "operations.json",
-        2: data_dir / "transactions.csv",
-        3: data_dir / "transactions_excel.xlsx"
-    }
+    return {1: data_dir / "operations.json", 2: data_dir / "transactions.csv", 3: data_dir / "transactions_excel.xlsx"}
 
 
 def check_files_exist(file_paths: dict) -> bool:
@@ -98,9 +95,9 @@ def filter_data(data_from_file: list[dict]) -> list[dict]:
 
     # Сортировка по дате (опционально)
     if get_user_input("Отсортировать операции по дате? Да/Нет: ", ["да", "нет"]) == "да":
-        order = get_user_input("По возрастанию или по убыванию?: ", ["по возрастанию", "по убыванию"])
-        reverse = order == "по убыванию"
-        filtered_data = sort_by_date(filtered_data, reverse)
+        if get_user_input("По возрастанию или по убыванию?: ", ["по возрастанию", "по убыванию"]) == 'по убыванию':
+            filtered_data = sort_by_date(filtered_data, False)
+        filtered_data = sort_by_date(filtered_data, True)
 
     # Фильтрация по валюте (опционально)
     if get_user_input("Выводить только рублевые транзакции? Да/Нет: ", ["да", "нет"]) == "да":
@@ -111,8 +108,10 @@ def filter_data(data_from_file: list[dict]) -> list[dict]:
 
 def search_by_description(sorted_data: list[dict]) -> dict:
     """Поиск операций по описанию"""
-    if get_user_input("Отфильтровать список транзакций по определенному слову в описании? Да/Нет: ",
-                      ["да", "нет"]) == "да":
+    if (
+        get_user_input("Отфильтровать список транзакций по определенному слову в описании? Да/Нет: ", ["да", "нет"])
+        == "да"
+    ):
         search_word = input("Введите слово: ")
         result_data_filter = process_bank_search(sorted_data, search_word)
 
