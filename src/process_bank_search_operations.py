@@ -1,9 +1,5 @@
-# import json
 import re
 from collections import Counter
-
-# with open(r'C:\Users\gabid\Desktop\skypro\pythonProject\data\operations.json', 'r', encoding='utf-8') as file:
-#     data_json = json.load(file)
 
 
 def process_bank_search(data: list[dict], search: str) -> list[dict]:
@@ -32,9 +28,3 @@ def process_bank_operations(data: list[dict], categories: list) -> dict:
     return dict(counted)
 
 
-# user = 'открытие'
-# print(data_json)
-# user_input_description = ["Перевод организации","Перевод с карты на карту"]
-# print(process_bank_operations(data_json, user_input_description))
-# print(process_bank_search(data_json, user))
-#####

@@ -1,4 +1,3 @@
-import sys
 from pathlib import Path
 from generators import filter_by_currency
 from process_bank_search_operations import process_bank_operations, process_bank_search
@@ -95,9 +94,10 @@ def filter_data(data_from_file: list[dict]) -> list[dict]:
 
     # Сортировка по дате (опционально)
     if get_user_input("Отсортировать операции по дате? Да/Нет: ", ["да", "нет"]) == "да":
-        if get_user_input("По возрастанию или по убыванию?: ", ["по возрастанию", "по убыванию"]) == 'по убыванию':
+        if get_user_input("По возрастанию или по убыванию?: ", ["по возрастанию", "по убыванию"]) == 'по возрастанию':
+            filtered_data = sort_by_date(filtered_data, True)
+        else:
             filtered_data = sort_by_date(filtered_data, False)
-        filtered_data = sort_by_date(filtered_data, True)
 
     # Фильтрация по валюте (опционально)
     if get_user_input("Выводить только рублевые транзакции? Да/Нет: ", ["да", "нет"]) == "да":

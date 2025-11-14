@@ -2,9 +2,6 @@ import csv
 
 import pandas as pd
 
-# read_csv = r"C:\Users\gabid\Desktop\skypro\pythonProject\data\transactions.csv"
-read_xl = r"C:\Users\gabid\Desktop\skypro\pythonProject\data\transactions_excel.xlsx"
-
 
 def reading_csv(path_to_file: str) -> list[dict]:
     """Функция преобразования данных из csv-файла в список словарей"""
@@ -12,7 +9,7 @@ def reading_csv(path_to_file: str) -> list[dict]:
     with open(path_to_file, "r", encoding="utf-8") as file:
         reader = csv.DictReader(file, delimiter=";")
         for row in reader:
-            # id;state;date;amount;currency_name;currency_code;from;to;description
+
             creating_dict = {
                 "id": row["id"],
                 "state": row["state"],
