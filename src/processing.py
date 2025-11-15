@@ -1,6 +1,6 @@
 from typing import Dict, List
 
-# from utils import transaction_data_json
+from widget import get_date
 
 
 # data = transaction_data_json(r'C:\Users\gabid\Desktop\skypro\pythonProject\data\operations.json')
